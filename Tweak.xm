@@ -16,34 +16,31 @@ NSString *localizedSearchText(NSInteger action) {
     NSString *languageCode = NSLocale.currentLocale.languageCode;
     NSString *returnKey;
     NSString *filePath;
-
     NSDictionary *chineseLanguageMap = @{
         @"CN": @"zh_CN",
         @"HK": @"zh_HK",
         @"TW": @"zh_TW"
     };
-
-	if (action == appLibrary) {
+    if (action == appLibrary) {
 		returnKey = @"APP_LIBRARY_SEARCH_PLACEHOLDER";
 	} else if (action == spotlight) {
 		returnKey = @"Search";
-	}
+    }
 
 	if ([languageCode hasPrefix:@"zh"]) {
 		NSString *regionCode = NSLocale.currentLocale.countryCode;
 		NSString *chineseLanguageCode = chineseLanguageMap[regionCode] ? chineseLanguageMap[regionCode] : @"zh_CN";
-
-		if (action == appLibrary) {
+        if (action == appLibrary) {
 			filePath = [NSString stringWithFormat:@"/System/Library/PrivateFrameworks/SpringBoardHome.framework/%@.lproj/SpringBoardHome.strings", chineseLanguageCode];
 		} else if (action == spotlight) {
 			filePath = [NSString stringWithFormat:@"/System/Library/PrivateFrameworks/UIKitCore.framework/%@.lproj/Localizable.strings", chineseLanguageCode];
-		}
+        }
 	} else {
 		if (action == appLibrary) {
 			filePath = [NSString stringWithFormat:@"/System/Library/PrivateFrameworks/SpringBoardHome.framework/%@.lproj/SpringBoardHome.strings", languageCode];
-		} else if (action == spotlight) {
+        } else if (action == spotlight) {
 			filePath = [NSString stringWithFormat:@"/System/Library/PrivateFrameworks/UIKitCore.framework/%@.lproj/Localizable.strings", languageCode];
-		}
+        }
 	}
 
     NSDictionary *dict = [[NSDictionary alloc] initWithContentsOfFile:filePath];
@@ -56,15 +53,14 @@ NSString *localizedSearchText(NSInteger action) {
 %new
 - (void)setNewFrame {
 	loadWithoutRespring();
-
-	UIView *view = self.pageControl;
+    UIView *view = self.pageControl;
 	CGRect newFrame = view.frame;
 
 	if (tweakEnabled) {
 		newFrame.origin.y = origYCoord + offset;
 	} else {
 		newFrame.origin.y = origYCoord;
-	}
+    }
 
 	view.frame = newFrame;
 }
@@ -75,8 +71,7 @@ NSString *localizedSearchText(NSInteger action) {
 	origYCoord = self.pageControl.frame.origin.y;
 
 	[self setNewFrame];
-
-	[NSDistributedNotificationCenter.defaultCenter addObserver:self selector:@selector(setNewFrame) name:@"tweakEnableStateChanged" object:nil];
+    [NSDistributedNotificationCenter.defaultCenter addObserver:self selector:@selector(setNewFrame) name:@"tweakEnableStateChanged" object:nil];
 }
 
 - (void)_updateDockOffscreenFractionWithMetrics:(const struct SBRootFolderViewMetrics *)metrics {
@@ -100,7 +95,7 @@ NSString *localizedSearchText(NSInteger action) {
 			subview.hidden = true;
 		} else {
 			subview.hidden = false;
-		}
+        }
 	}
 }
 
@@ -111,30 +106,11 @@ NSString *localizedSearchText(NSInteger action) {
 		[self newLayout];
 
 		[NSDistributedNotificationCenter.defaultCenter addObserver:self selector:@selector(newLayout) name:@"tweakEnableStateChanged" object:nil];
-	}
+    }
 }
 
 %end
 
-// ... (code ở trên giữ nguyên)
-		if (@available(iOS 15, *)) {
-			self.blurView = [%c(MTMaterialView) materialViewWithRecipe:19 options:2];
-		} else {
-			self.blurView = [%c(MTMaterialView) materialViewWithRecipe:19 configuration:1];
-		}
-
-		self.blurView.layer.cornerRadius = 17.5;
-		self.blurView.layer.continuousCorners = true;
-        
-        // --- CHÈN THÊM 2 DÒNG NÀY ĐỂ TẠO VIỀN SÁNG VISIONOS ---
-        self.blurView.layer.borderWidth = 0.5;
-        self.blurView.layer.borderColor = [UIColor colorWithWhite:1.0 alpha:0.25].CGColor;
-        // -----------------------------------------------------
-
-		self.blurView.translatesAutoresizingMaskIntoConstraints = false;
-		self.blurView.captureOnly = hideBackground ? true : false;
-		[self addSubview:self.blurView];
-// ... (code ở dưới giữ nguyên)
 
 // * ACTUAL SEARCH BUTTON * //
 
@@ -146,10 +122,8 @@ NSString *localizedSearchText(NSInteger action) {
 %new
 - (void)newTapGesture:(id)gestureRecognizer {
     loadWithoutRespring();
-
     if (tweakEnabled == true && [gestureRecognizer isKindOfClass:%c(UITapGestureRecognizer)]) {
         SBIconController *iconController = [%c(SBIconController) sharedInstance];
-
         if (action == spotlight) {
             [iconController searchBarDidFocus];
         }
@@ -157,11 +131,11 @@ NSString *localizedSearchText(NSInteger action) {
         if (action == appLibrary) {
 			if (@available(iOS 15, *)) {
 				SBLibraryViewController *appLibraryViewController = [iconController libraryViewController];
-				[iconController presentLibraryAnimated:true completion:nil];
+                [iconController presentLibraryAnimated:true completion:nil];
 				[[appLibraryViewController containerViewController] setActive:true];
 			} else {
 				[iconController presentLibraryOverlayForIconManager:nil];
-			}
+            }
         }
     }
 }
@@ -176,12 +150,11 @@ NSString *localizedSearchText(NSInteger action) {
 
 - (void)didMoveToWindow {
     %orig;
-
-	if ([[self _viewControllerForAncestor] isKindOfClass:%c(SBRootFolderController)]) {
+    if ([[self _viewControllerForAncestor] isKindOfClass:%c(SBRootFolderController)]) {
 		[NSDistributedNotificationCenter.defaultCenter addObserver:self selector:@selector(newActsAsButton) name:@"tweakEnableStateChanged" object:nil];
 		[NSDistributedNotificationCenter.defaultCenter addObserver:self selector:@selector(newTapGesture:) name:@"tweakEnableStateChanged" object:nil];
 		[NSDistributedNotificationCenter.defaultCenter addObserver:self selector:@selector(newTapGesture:) name:@"actionStateChanged" object:nil];
-	}
+    }
 }
 
 %new
@@ -192,7 +165,7 @@ NSString *localizedSearchText(NSInteger action) {
 		return true;
 	} else {
 		return false;
-	}
+    }
 }
 
 - (BOOL)actsAsButton {
@@ -220,20 +193,20 @@ NSString *localizedSearchText(NSInteger action) {
 	self.searchLabel.text = localizedSearchText(action);
 
 	self.blurView.captureOnly = hideBackground ? true : false;
-	if (tweakEnabled == true && !pillWasAdded) {
+    if (tweakEnabled == true && !pillWasAdded) {
 		if (@available(iOS 15, *)) {
 			self.blurView = [%c(MTMaterialView) materialViewWithRecipe:19 options:2];
-		} else {
+        } else {
 			self.blurView = [%c(MTMaterialView) materialViewWithRecipe:19 configuration:1];
 		}
 
 		self.blurView.layer.cornerRadius = 17.5;
 		self.blurView.layer.continuousCorners = true;
-		
-        // --- VIỀN BLUR VISIONOS ---
+
+        // --- CHÈN VIỀN BLUR VISIONOS ---
         self.blurView.layer.borderWidth = 0.5;
         self.blurView.layer.borderColor = [UIColor colorWithWhite:1.0 alpha:0.25].CGColor;
-        // --------------------------
+        // --------------------------------
 
 		self.blurView.translatesAutoresizingMaskIntoConstraints = false;
 		self.blurView.captureOnly = hideBackground ? true : false;
@@ -243,39 +216,38 @@ NSString *localizedSearchText(NSInteger action) {
 		self.searchIcon.image = [UIImage systemImageNamed:@"magnifyingglass"];
 		self.searchIcon.contentMode = UIViewContentModeScaleAspectFit;
 		self.searchIcon.tintColor = UIColor.whiteColor;
-		self.searchIcon.translatesAutoresizingMaskIntoConstraints = false;
+        self.searchIcon.translatesAutoresizingMaskIntoConstraints = false;
 		self.searchIcon.alpha = 0.8;
 		[self.blurView insertSubview:self.searchIcon atIndex:0];
 
 		self.searchLabel = [UILabel new];
 		self.searchLabel.textColor = UIColor.whiteColor;
 		self.searchLabel.text = localizedSearchText(action);
-		self.searchLabel.translatesAutoresizingMaskIntoConstraints = false;
+        self.searchLabel.translatesAutoresizingMaskIntoConstraints = false;
 		self.searchLabel.alpha = 0.8;
 		self.searchLabel.font = [UIFont systemFontOfSize:14];
 		[self.blurView insertSubview:self.searchLabel atIndex:1];
 
 		pillWasAdded = true;
-	}
+    }
 
 	if (!tweakEnabled) {
 		self.blurView.alpha = 0;
 		self.blurView.hidden = true;
 	} else {
-        // Blur nhẹ và trong suốt cho đẹp
-		self.blurView.alpha = 0.6; 
+		self.blurView.alpha = 0.6; // Đã chỉnh blur trong suốt hơn
 		self.blurView.hidden = false;
 	}
 }
+
 - (void)didMoveToSuperview {
 	%orig;
-
-	[self addSearchPill];
+    [self addSearchPill];
 
 	[NSDistributedNotificationCenter.defaultCenter addObserver:self selector:@selector(newActsAsButton) name:@"tweakEnableStateChanged" object:nil];
 	[NSDistributedNotificationCenter.defaultCenter addObserver:self selector:@selector(addSearchPill) name:@"tweakEnableStateChanged" object:nil];
 	[NSDistributedNotificationCenter.defaultCenter addObserver:self selector:@selector(addSearchPill) name:@"actionStateChanged" object:nil];
-	[NSDistributedNotificationCenter.defaultCenter addObserver:self selector:@selector(addSearchPill) name:@"hideBackgroundStateChanged" object:nil];
+    [NSDistributedNotificationCenter.defaultCenter addObserver:self selector:@selector(addSearchPill) name:@"hideBackgroundStateChanged" object:nil];
 }
 
 %new
@@ -286,18 +258,18 @@ NSString *localizedSearchText(NSInteger action) {
 		UIView *contentView = self.subviews[0];
 
 		[self.blurView.centerXAnchor constraintEqualToAnchor:contentView.centerXAnchor].active = YES;
-		[self.blurView.bottomAnchor constraintEqualToAnchor:contentView.bottomAnchor].active = YES;
+        [self.blurView.bottomAnchor constraintEqualToAnchor:contentView.bottomAnchor].active = YES;
 		[self.blurView.heightAnchor constraintEqualToConstant:35].active = YES;
 
 		[self.searchIcon.widthAnchor constraintEqualToConstant:13].active = YES;
 		[self.searchIcon.centerYAnchor constraintEqualToAnchor:self.blurView.centerYAnchor].active = YES;
-		[self.searchIcon.leadingAnchor constraintEqualToAnchor:self.blurView.leadingAnchor constant:13].active = YES;
+        [self.searchIcon.leadingAnchor constraintEqualToAnchor:self.blurView.leadingAnchor constant:13].active = YES;
 
 		[self.searchLabel.centerYAnchor constraintEqualToAnchor:self.blurView.centerYAnchor].active = YES;
 		[self.searchLabel.leadingAnchor constraintEqualToAnchor:self.searchIcon.trailingAnchor constant:4].active = YES;
 
 		[self.blurView.widthAnchor constraintEqualToAnchor:self.searchLabel.widthAnchor constant:45].active = YES;
-	}
+    }
 }
 
 - (void)layoutSubviews {
@@ -308,8 +280,7 @@ NSString *localizedSearchText(NSInteger action) {
 		[self setCurrentPageIndicatorTintColor:[UIColor labelColor]];
 
 		[self newLayout];
-
-		[NSDistributedNotificationCenter.defaultCenter addObserver:self selector:@selector(newActsAsButton) name:@"tweakEnableStateChanged" object:nil];
+        [NSDistributedNotificationCenter.defaultCenter addObserver:self selector:@selector(newActsAsButton) name:@"tweakEnableStateChanged" object:nil];
 		[NSDistributedNotificationCenter.defaultCenter addObserver:self selector:@selector(newLayout) name:@"tweakEnableStateChanged" object:nil];
 
 	}
