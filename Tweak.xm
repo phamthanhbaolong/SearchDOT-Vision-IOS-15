@@ -235,14 +235,18 @@ NSString *localizedSearchText(NSInteger action) {
 		pillWasAdded = true;
     }
 
-	if (!tweakEnabled) {
+if (!tweakEnabled) {
 		self.blurView.alpha = 0;
 		self.blurView.hidden = true;
 	} else {
-		self.blurView.alpha = blurAlpha; // Đã chỉnh blur trong suốt hơn
+        // 1. Trả lại độ hiển thị 100% cho khung kính để nó không bị tàng hình
+		self.blurView.alpha = 1.0; 
+        
+        // 2. Ép hệ thống dùng thanh kéo để giảm cường độ Blur (độ đục/mờ của hạt kính)
+        [self.blurView setValue:@(blurAlpha) forKey:@"weighting"]; 
+
 		self.blurView.hidden = false;
 	}
-}
 
 - (void)didMoveToSuperview {
 	%orig;
