@@ -217,14 +217,14 @@ NSString *localizedSearchText(NSInteger action) {
 		self.searchIcon.contentMode = UIViewContentModeScaleAspectFit;
 		self.searchIcon.tintColor = UIColor.whiteColor;
         self.searchIcon.translatesAutoresizingMaskIntoConstraints = false;
-		self.searchIcon.alpha = 0.8;
+		self.searchIcon.alpha = 1.0;
 		[self.blurView insertSubview:self.searchIcon atIndex:0];
 
 		self.searchLabel = [UILabel new];
 		self.searchLabel.textColor = UIColor.whiteColor;
 		self.searchLabel.text = localizedSearchText(action);
         self.searchLabel.translatesAutoresizingMaskIntoConstraints = false;
-		self.searchLabel.alpha = 0.8;
+		self.searchLabel.alpha = 1.0;
 		self.searchLabel.font = [UIFont systemFontOfSize:14];
 		[self.blurView insertSubview:self.searchLabel atIndex:1];
 
@@ -235,7 +235,7 @@ NSString *localizedSearchText(NSInteger action) {
 		self.blurView.alpha = 0;
 		self.blurView.hidden = true;
 	} else {
-		self.blurView.alpha = 0.6; // Đã chỉnh blur trong suốt hơn
+		self.blurView.alpha = 0.8; // Đã chỉnh blur trong suốt hơn
 		self.blurView.hidden = false;
 	}
 }
