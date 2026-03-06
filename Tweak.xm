@@ -13,10 +13,7 @@ static void loadWithoutRespring() {
 	onePageSupport = [prefs objectForKey:@"onePageSupport"] ? [prefs boolForKey:@"onePageSupport"] : false;
     hideBackground = [prefs objectForKey:@"hideBackground"] ? [prefs boolForKey:@"hideBackground"] : false;
 	onePageSupport = [prefs objectForKey:@"onePageSupport"] ? [prefs boolForKey:@"onePageSupport"] : false;
-
-    // --- THÊM DÒNG NÀY ---
 	blurAlpha = [prefs objectForKey:@"blurAlpha"] ? [prefs floatForKey:@"blurAlpha"] : 0.6;
-}
 }
 
 NSString *localizedSearchText(NSInteger action) {
