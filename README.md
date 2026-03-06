@@ -1,7 +1,7 @@
 <img width="70" style="border-radius:10px" src="searchdotsprefs/Resources/icon@3.png">
 
 ---
-# SearchDots
+# SearchDots Vision
 #### Search Pill Ported from iOS 16
 ###### Compatible with iOS 15.0-15.7
 ---
