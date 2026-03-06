@@ -1,6 +1,7 @@
 #import "Tweak.h"
 
 BOOL pillWasAdded = false;
+CGFloat blurAlpha = 0.6; // Thêm dòng này để tạo biến độ mờ
 
 static void loadWithoutRespring() {
 	NSUserDefaults *prefs = [[NSUserDefaults alloc] initWithSuiteName:@"com.nightwind.searchdotsprefs"];
@@ -10,6 +11,12 @@ static void loadWithoutRespring() {
 	offset = [prefs objectForKey:@"yOffset"] ? [prefs floatForKey:@"yOffset"] : 0;
 	hideBackground = [prefs objectForKey:@"hideBackground"] ? [prefs boolForKey:@"hideBackground"] : false;
 	onePageSupport = [prefs objectForKey:@"onePageSupport"] ? [prefs boolForKey:@"onePageSupport"] : false;
+    hideBackground = [prefs objectForKey:@"hideBackground"] ? [prefs boolForKey:@"hideBackground"] : false;
+	onePageSupport = [prefs objectForKey:@"onePageSupport"] ? [prefs boolForKey:@"onePageSupport"] : false;
+
+    // --- THÊM DÒNG NÀY ---
+	blurAlpha = [prefs objectForKey:@"blurAlpha"] ? [prefs floatForKey:@"blurAlpha"] : 0.6;
+}
 }
 
 NSString *localizedSearchText(NSInteger action) {
@@ -235,7 +242,7 @@ NSString *localizedSearchText(NSInteger action) {
 		self.blurView.alpha = 0;
 		self.blurView.hidden = true;
 	} else {
-		self.blurView.alpha = 0.8; // Đã chỉnh blur trong suốt hơn
+		self.blurView.alpha = blurAlpha; // Đã chỉnh blur trong suốt hơn
 		self.blurView.hidden = false;
 	}
 }
