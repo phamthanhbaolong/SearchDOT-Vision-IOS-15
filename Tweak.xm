@@ -220,7 +220,6 @@ NSString *localizedSearchText(NSInteger action) {
 	self.searchLabel.text = localizedSearchText(action);
 
 	self.blurView.captureOnly = hideBackground ? true : false;
-
 	if (tweakEnabled == true && !pillWasAdded) {
 		if (@available(iOS 15, *)) {
 			self.blurView = [%c(MTMaterialView) materialViewWithRecipe:19 options:2];
@@ -230,6 +229,12 @@ NSString *localizedSearchText(NSInteger action) {
 
 		self.blurView.layer.cornerRadius = 17.5;
 		self.blurView.layer.continuousCorners = true;
+		
+        // --- VIỀN BLUR VISIONOS ---
+        self.blurView.layer.borderWidth = 0.5;
+        self.blurView.layer.borderColor = [UIColor colorWithWhite:1.0 alpha:0.25].CGColor;
+        // --------------------------
+
 		self.blurView.translatesAutoresizingMaskIntoConstraints = false;
 		self.blurView.captureOnly = hideBackground ? true : false;
 		[self addSubview:self.blurView];
@@ -257,11 +262,11 @@ NSString *localizedSearchText(NSInteger action) {
 		self.blurView.alpha = 0;
 		self.blurView.hidden = true;
 	} else {
-		self.blurView.alpha = 0.5;
+        // Blur nhẹ và trong suốt cho đẹp
+		self.blurView.alpha = 0.6; 
 		self.blurView.hidden = false;
 	}
 }
-
 - (void)didMoveToSuperview {
 	%orig;
 
