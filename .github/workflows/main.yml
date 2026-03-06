@@ -21,8 +21,10 @@ jobs:
           path: theos
           submodules: recursive
 
-      - name: Tải iOS SDK
-        run: git clone https://github.com/theos/sdks.git theos/sdks
+      - name: Tải iOS SDK (Đã fix lỗi 128)
+        run: |
+          git clone https://github.com/theos/sdks.git temp_sdks
+          mv temp_sdks/*.sdk theos/sdks/
 
       - name: Build thành file .deb
         run: |
