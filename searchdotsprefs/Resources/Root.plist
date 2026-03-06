@@ -11,7 +11,7 @@
 			<string>SearchDotsBannerCell</string>
 
 			<key>tweakTitle</key>
-			<string>SearchDots</string>
+			<string>SearchDots Vision</string>
 
 			<key>height</key>
 			<real>225</real>
@@ -20,7 +20,7 @@
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
-			<string>Contact</string>
+			<string>Liên hệ</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -29,13 +29,13 @@
 			<string>SearchDotsContactCell</string>
 
 			<key>titleLabel</key>
-			<string>Nightwind</string>
+			<string>Pham Long</string>
 			<key>bottomLabel</key>
-			<string>@NightwindDev</string>
+			<string>Liên hệ cập nhật hoặc yêu cầu tính năng</string>
 			<key>image</key>
-			<string>Nightwind.jpg</string>
+			<string>phamlong.jpg</string>
 			<key>url</key>
-			<string>https://twitter.com/NightwindDev</string>
+			<string>https://twitter.com</string>
 			<key>action</key>
 			<string>open:</string>
 
@@ -64,11 +64,11 @@
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
-			<string>Action</string>
+			<string>Chọn kiểu nút tìm kiếm</string>
 			<key>footerText</key>
-			<string>Spotlight Search: Once pressed, Spotlight Search will be invoked.
+			<string>Spotlight Search: Trình tìm kiếm Spotlight mặc định
 
-App Library Search: Once pressed, the App Library Search will be invoked.</string>
+App Library Search: Trình tìm kiếm thư viện ứng dụng.</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -118,9 +118,9 @@ App Library Search: Once pressed, the App Library Search will be invoked.</strin
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
-			<string>Hide Background</string>
+			<string>Ẩn nền </string>
 			<key>footerText</key>
-			<string>If enabled, the background of the pill will be hidden.</string>
+			<string>Ẩn nền của nút tìm kiếm.</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -132,7 +132,7 @@ App Library Search: Once pressed, the App Library Search will be invoked.</strin
 			<key>key</key>
 			<string>hideBackground</string>
 			<key>label</key>
-			<string>Hide Background</string>
+			<string>Ẩn nền</string>
 		</dict>
         <dict>
 			<key>cell</key>
@@ -148,7 +148,7 @@ App Library Search: Once pressed, the App Library Search will be invoked.</strin
 			<key>defaults</key>
 			<string>com.nightwind.searchdotsprefs</string>
 			<key>key</key>
-			<string>blurAlpha</string>
+			<string>blur Alpha</string>
 			<key>min</key>
 			<real>0.1</real>
 			<key>max</key>
@@ -166,7 +166,7 @@ App Library Search: Once pressed, the App Library Search will be invoked.</strin
 			<key>label</key>
 			<string>One Page Support</string>
 			<key>footerText</key>
-			<string>This option REQUIRES a respring to apply. It will force the pill to show even if there is only one page on the homescreen.</string>
+			<string>Tùy chọn này YÊU CẦU khởi động lại thiết bị để áp dụng. Nó sẽ buộc thanh menu hiển thị ngay cả khi chỉ có một trang trên màn hình chính.</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -176,9 +176,9 @@ App Library Search: Once pressed, the App Library Search will be invoked.</strin
 			<key>defaults</key>
 			<string>com.nightwind.searchdotsprefs</string>
 			<key>key</key>
-			<string>onePageSupport</string>
+			<string>Hỗ trợ 1 trang</string>
 			<key>label</key>
-			<string>One Page Support</string>
+			<string>Hỗ trợ 1 trang</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -188,7 +188,7 @@ App Library Search: Once pressed, the App Library Search will be invoked.</strin
 			<key>action</key>
 			<string>respring</string>
 			<key>label</key>
-			<string>Respring</string>
+			<string>Áp dụng và Respring</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -203,13 +203,13 @@ App Library Search: Once pressed, the App Library Search will be invoked.</strin
 			<string>SearchDotsContactCell</string>
 
 			<key>titleLabel</key>
-			<string>Source Code</string>
+			<string>Mã nguồn</string>
 			<key>bottomLabel</key>
 			<string>GitHub</string>
 			<key>image</key>
 			<string>GitHub.png</string>
 			<key>url</key>
-			<string>https://github.com/NightwindDev/SearchDots</string>
+			<string>https://github.com/</string>
 			<key>action</key>
 			<string>open:</string>
 
@@ -222,10 +222,10 @@ App Library Search: Once pressed, the App Library Search will be invoked.</strin
 			<key>footerAlignment</key>
 			<integer>1</integer>
 			<key>footerText</key>
-			<string>© Nightwind 2023</string>
+			<string>© Nightwind - PhamlongIT</string>
 		</dict>
 	</array>
 	<key>title</key>
-	<string>SearchDots</string>
+	<string>SearchDots Vision</string>
 </dict>
 </plist>
