@@ -1,0 +1,36 @@
+name: Build iOS Tweak
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Lấy mã nguồn
+        uses: actions/checkout@v4
+
+      - name: Cài đặt công cụ phụ trợ (Fakeroot)
+        run: sudo apt-get update && sudo apt-get install -y fakeroot
+
+      - name: Cài đặt Theos
+        uses: actions/checkout@v4
+        with:
+          repository: theos/theos
+          path: theos
+          submodules: recursive
+
+      - name: Tải iOS SDK
+        run: git clone https://github.com/theos/sdks.git theos/sdks
+
+      - name: Build thành file .deb
+        run: |
+          export THEOS=${{ github.workspace }}/theos
+          make package FINALPACKAGE=1
+
+      - name: Đăng tải file .deb
+        uses: actions/upload-artifact@v4
+        with:
+          name: Tweak-Deb-File
+          path: packages/*.deb
